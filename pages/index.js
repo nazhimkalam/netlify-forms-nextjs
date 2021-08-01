@@ -11,8 +11,15 @@ export default function Home() {
 
       <main>
         <h1>A Form with No CSS v2</h1>
-        <form name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact" />
+          <div hidden>
+            <input name="bot-field" />
+          </div>
           <p>
             <label>
               Your Name: <input type="text" name="name" />
