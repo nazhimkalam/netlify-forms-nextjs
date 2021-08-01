@@ -10,8 +10,9 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>A Form with No CSS</h1>
+        <h1>A Form with No CSS v2</h1>
         <form name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
           <p>
             <label>
               Your Name: <input type="text" name="name" />
