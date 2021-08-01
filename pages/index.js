@@ -1,6 +1,25 @@
 import Head from "next/head";
+import { Form, Input, InputNumber, Button } from "antd";
 
 export default function Home() {
+  const layout = {
+    labelCol: { span: 2 },
+    wrapperCol: { span: 16 },
+  };
+
+  /* eslint-disable no-template-curly-in-string */
+  const validateMessages = {
+    required: "${label} is required!",
+    types: {
+      email: "${label} is not a valid email!",
+      number: "${label} is not a valid number!",
+    },
+    number: {
+      range: "${label} must be between ${min} and ${max}",
+    },
+  };
+  /* eslint-enable no-template-curly-in-string */
+
   return (
     <div>
       <Head>
@@ -10,37 +29,64 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>A Form with No CSS v2</h1>
-        <form
+        <h1>Contact Form</h1>
+        <Form
+          {...layout}
           name="contact"
           method="POST"
           data-netlify="true"
-          data-netlify-honeypot="bot-field">
+          data-netlify-honeypot="bot-field"
+          validateMessages={validateMessages}>
           <input type="hidden" name="form-name" value="contact" />
           <div hidden>
             <input name="bot-field" />
           </div>
-          <p>
-            <label>
-              Your Name: <input type="text" name="name" />
-            </label>
-          </p>
-          <p>
-            <label>
-              Your Email: <input type="email" name="email" />
-            </label>
-          </p>
-
-          <p>
-            <label>
-              Message: <textarea name="message"></textarea>
-            </label>
-          </p>
-          <p>
-            <button type="submit">CONFIRM</button>
-          </p>
-        </form>
+          <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="email" label="Email" rules={[{ type: "email" }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="message" label="Message">
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
       </main>
     </div>
   );
 }
+
+//  <form
+//   name="contact"
+//   method="POST"
+//   data-netlify="true"
+//   data-netlify-honeypot="bot-field">
+//   <input type="hidden" name="form-name" value="contact" />
+// <div hidden>
+//   <input name="bot-field" />
+// </div>
+//   <p>
+//     <label>
+//       Your Name: <input type="text" name="name" />
+//     </label>
+//   </p>
+//   <p>
+//     <label>
+//       Your Email: <input type="email" name="email" />
+//     </label>
+//   </p>
+
+//   <p>
+//     <label>
+//       Message: <textarea name="message"></textarea>
+//     </label>
+//   </p>
+//   <p>
+//     <button type="submit">CONFIRM</button>
+//   </p>
+// </form>
